@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mulyono's Game Store - Discover Games</title>
+    <style>
+        body {
+            font-family: Arial, Impact;
+            margin: 0;
+            padding: 0;
+            background-color: #0d0d0d;
+            color: #e0e0e0;
+        }
+        header {
+            background-color: #1a2e1a;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+        .logo h1 {
+            color: #4caf50;
+            margin: 0;
+            font-size: 24px;
+        }
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            margin: 0 20px;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            background-color: #2e4e2e;
+            color: #e0e0e0;
+        }
+        .search-bar input::placeholder {
+            color: #a0a0a0;
+        }
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #4caf50;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .banner {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .banner img {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            border-radius: 8px;
+        }
+        .category {
+            margin-bottom: 40px;
+        }
+        .category h2 {
+            color: #4caf50;
+            border-bottom: 2px solid #4caf50;
+            padding-bottom: 10px;
+            font-size: 28px;
+        }
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .game {
+            background-color: #1a2e1a;
+            border: 1px solid #2e4e2e;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .game:hover {
+            transform: scale(1.05);
+            border-color: #4caf50;
+        }
+        .game img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        .game-content {
+            padding: 15px;
+        }
+        .game h3 {
+            margin: 0 0 10px 0;
+            color: #e0e0e0;
+            font-size: 18px;
+        }
+        .game p {
+            margin: 0 0 15px 0;
+            color: #a0a0a0;
+            font-size: 14px;
+        }
+        .price {
+            font-weight: bold;
+            color: #4caf50;
+            margin-bottom: 10px;
+        }
+        .buy-btn {
+            background-color: #4caf50;
+            color: #0d0d0d;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .buy-btn:hover {
+            background-color: #388e3c;
+        }
+        footer {
+            background-color: #1a2e1a;
+            color: #a0a0a0;
+            padding: 40px 20px;
+            margin-top: 20px;
+            border-top: 2px solid #4caf50;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-section h3 {
+            color: #4caf50;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+        .footer-section ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-section ul li a:hover {
+            color: #4caf50;
+        }
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .social-links a {
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+        .social-links img {
+            width: 24px;
+            height: 24px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #2e4e2e;
+        }
+        .footer-bottom p {
+            margin: 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://i.pinimg.com/736x/65/90/f1/6590f1cc2c7ac3819e19984086a7c540.jpg" alt="Mulyono's Store Logo">
+            <h1>Mulyono's Game Store</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search games..." id="searchInput">
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Categories</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="banner">
+            <img src="https://www.mwave.com.au/blog/content/images/2024/07/BLOG-BANNERS.png" alt="Banner">
+        </div>
+        <div class="category">
+            <h2>Action Strategy</h2>
+            <div class="game-list">
+                <div class="game">
+                    <img src="https://wallpapers.com/images/hd/pixel-3-playerunknown-s-battlegrounds-background-1080-x-1920-k2qyd5d2ci6wszbp.jpg" alt="PUBG">
+                    <div class="game-content">
+                        <h3>PUBG</h3>
+                        <p>Battle royale action game.</p>
+                        <div class="price">$29.99</div>
+                        <button class="buy-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://images-cdn.ubuy.co.id/67666fcd79a66d725f4a1088-cod-modern-warfare-ii-2022-game.jpg" alt="COD">
+                    <div class="game-content">
+                        <h3>Call of Duty</h3>
+                        <p>Intense first-person shooter.</p>
+                        <div class="price">$59.99</div>
+                        <button class="buy-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://rukminim2.flixcart.com/image/480/640/xif0q/code-in-the-box-game/d/p/1/pc-black-myth-wukong-steam-pc-digital-download-offline-no-cd-dvd-original-imah4ybjza9m9ygn.jpeg?q=90" alt="Other Action Game">
+                    <div class="game-content">
+                        <h3>Other Action Strategy Game</h3>
+                        <p>Exciting strategy and action.</p>
+                        <div class="price">$39.99</div>
+                        <button class="buy-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://example.com/fortnite.jpg" alt="Fortnite">
+                    <div class="game-content">
+                        <h3>Fortnite</h3>
+                        <p>Battle royale with building mechanics.</p>
+                        <div class="price">Free (with in-app purchases)</div>
+                        <button class="buy-btn">Download Now</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://example.com/apex-legends.jpg" alt="Apex Legends">
+                    <div class="game-content">
+                        <h3>Apex Legends</h3>
+                        <p>Team-based battle royale shooter.</p>
+                        <div class="price">Free (with in-app purchases)</div>
+                        <button class="buy-btn">Download Now</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://example.com/rainbow-six-siege.jpg" alt="Rainbow Six Siege">
+                    <div class="game-content">
+                        <h3>Rainbow Six Siege</h3>
+                        <p>Tactical shooter with strategy elements.</p>
+                        <div class="price">$19.99</div>
+                        <button class="buy-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2>Fantasy</h2>
+            <div class="game-list">
+                <div class="game">
+                    <img src="https://images-cdn.ubuy.co.id/635238435dc762094c218093-genshin-impact-poster-gaming-poster.jpg" alt="Genshin Impact">
+                    <div class="game-content">
+                        <h3>Genshin Impact</h3>
+                        <p>Open-world fantasy adventure.</p>
+                        <div class="price">Free (with in-app purchases)</div>
+                        <button class="buy-btn">Download Now</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://i.pinimg.com/236x/1d/27/f8/1d27f87d6352122e97b09fb1f740815e.jpg" alt="Wuthering Waves">
+                    <div class="game-content">
+                        <h3>Wuthering Waves</h3>
+                        <p>Immersive fantasy RPG.</p>
+                        <div class="price">Free (with in-app purchases)</div>
+                        <button class="buy-btn">Download Now</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://upload-os-bbs.hoyolab.com/upload/2024/08/25/405558683/e9cc7c08541430a3891ba456821ccb76_15363581929469545.jpg?x-oss-process=image%2Fresize%2Cs_1000%2Fauto-orient%2C0%2Finterlace%2C1%2Fformat%2Cwebp%2Fquality%2Cq_70" alt="Zenless Zone Zero">
+                    <div class="game-content">
+                        <h3>Zenless Zone Zero</h3>
+                        <p>Action-packed fantasy world.</p>
+                        <div class="price">Free (with in-app purchases)</div>
+                        <button class="buy-btn">Download Now</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZDdmODgzODYtNzFiNy00MzRkLWE5MjQtZTdlOTIwOTNkNTBkXkEyXkFqcGc@.V1.jpg" alt="Other Fantasy Game">
+                    <div class="game-content">
+                        <h3>Other Fantasy Game</h3>
+                        <p>Magical adventures await.</p>
+                        <div class="price">$49.99</div>
+                        <button class="buy-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://example.com/honkai-star-rail.jpg" alt="Honkai: Star Rail">
+                    <div class="game-content">
+                        <h3>Honkai: Star Rail</h3>
+                        <p>Space fantasy RPG with turn-based combat.</p>
+                        <div class="price">Free (with in-app purchases)</div>
+                        <button class="buy-btn">Download Now</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://example.com/the-legend-of-zelda.jpg" alt="The Legend of Zelda">
+                    <div class="game-content">
+                        <h3>The Legend of Zelda</h3>
+                        <p>Epic fantasy adventure series.</p>
+                        <div class="price">$59.99</div>
+                        <button class="buy-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="game">
+                    <img src="https://example.com/final-fantasy-vii.jpg" alt="Final Fantasy VII">
+                    <div class="game-content">
+                        <h3>Final Fantasy VII</h3>
+                        <p>Classical fantasy RPG remake.</p>
+                        <div class="price">$39.99</div>
+                        <button class="buy-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>Discover the best games at Mulyono's Game Store. From action-packed adventures to immersive fantasies, we have it all!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
+                    <a href="#" title="Twitter"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter"></a>
+                    <a href="#" title="Instagram"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
+                    <a href="#" title="Mastercard"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Mulyono's Game Store. All rights reserved. Note: This is a demo website. Actual game sales should comply with legal and platform policies.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const games = document.querySelectorAll('.game');
+            
+            games.forEach(game => {
+                const title = game.querySelector('h3').textContent.toLowerCase();
+                const description = game.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    game.style.display = 'block';
+                } else {
+                    game.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
